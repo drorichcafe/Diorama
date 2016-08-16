@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Enabled>true</Enabled>
+  <KeyReload>R</KeyReload>
+  <PrintStageName>false</PrintStageName><!-- ステージ名の表示 -->
+  <PrintBoneName>false</PrintBoneName><!-- メッシュに含まれる骨名の表示 -->
+  <DrawCenterPos>false</DrawCenterPos><!-- オブジェクト中心位置表示 -->
+  <DrawCollision>false</DrawCollision><!-- あたり判定表示 -->
+<!--
+モデルは表示するオブジェクトの見た目、あたり判定、物理演算情報などを定義します
+定義したモデルはステージに配置したりジェネレータで生成できたりするようになります
+背景にオブジェクト置きたいだけの人はCollisionsやGeneratorsは書かなくても大丈夫です
+メッシュそのまま表示です。ジョイントでポーズをつけるようなものは面倒なので対応してないです
+-->
+  <Models>
+    <Model>
+      <Name>TracerWeaponL</Name>
+      <File>coco_OW_Tracer_akimbopistols.model</File><!-- ファイル名 -->
+      <Position><x>0.17</x><y>-1.15</y><z>-0.425</z></Position><!-- 位置や向きなどを調整して扱いやすくする -->
+      <Rotation><x>-90</x><y>0</y><z>0</z></Rotation>
+      <Scale><x>1</x><y>1</y><z>1</z></Scale>
+      <InvisibleBones>Bip01 R Hand</InvisibleBones><!-- 右手にウェイトがある頂点は表示しない -->
+      <Collisions>
+        <Collision><!-- モデルのあたり判定（複数記述可能） -->
+          <Primitive>Cube</Primitive><!-- https://docs.unity3d.com/ScriptReference/PrimitiveType.html -->
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.05</x><y>0.15</y><z>0.2</z></Scale>
+        </Collision>
+      </Collisions>
+    </Model>
+    <Model>
+      <Name>TracerWeaponR</Name>
+      <File>coco_OW_Tracer_akimbopistols.model</File>
+      <Position><x>-0.17</x><y>-1.15</y><z>-0.425</z></Position>
+      <Rotation><x>-90</x><y>0</y><z>0</z></Rotation>
+      <Scale><x>1</x><y>1</y><z>1</z></Scale>
+      <InvisibleBones>Bip01 L Hand</InvisibleBones><!-- 左手にウェイトがある頂点は表示しない -->
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.05</x><y>0.15</y><z>0.2</z></Scale>
+        </Collision>
+      </Collisions>
+    </Model>
+    <Model>
+      <Name>TracerViser</Name>
+      <File>coco_OW_Tracer_viser1.model</File>
+      <Position><x>0</x><y>-0.01</y><z>0.01</z></Position>
+      <Rotation><x>-90</x><y>0</y><z>0</z></Rotation>
+      <Scale><x>1</x><y>1</y><z>1</z></Scale>
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.2</x><y>0.1</y><z>0.1</z></Scale>
+        </Collision>
+      </Collisions>
+    </Model>
+    <Model>
+      <Name>F22</Name>
+      <File>f22.model</File>
+      <Position><x>0</x><y>0.01</y><z>0.1</z></Position>
+      <Rotation><x>0</x><y>180</y><z>180</z></Rotation>
+      <Scale><x>0.01</x><y>0.01</y><z>0.01</z></Scale>
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.1</x><y>0.05</y><z>0.25</z></Scale>
+        </Collision>
+      </Collisions>
+      <Generators><!-- ゲームオブジェクトを生成する -->
+        <Generator>
+          <Timespan>1.0</Timespan><!-- 何秒ごとにオブジェクトを生成するか -->
+          <Lifespan>5.0</Lifespan><!-- 生成したオブジェクトの寿命 -->
+          <SpeedMin>5.0</SpeedMin><!-- 最小射出速度 -->
+          <SpeedMax>10.0</SpeedMax><!-- 最大射出速度-->
+          <RotationMin><x>0</x><y>0</y><z>0</z></RotationMin><!-- 最小射出方向 -->
+          <RotationMax><x>0</x><y>0</y><z>0</z></RotationMax><!-- 最大射出方向 -->
+          <Object><!-- 生成するオブジェクトの情報 -->
+            <Model>Missile</Model><!-- ミサイルモデルを生成する -->
+            <Position><x>0</x><y>-0.01</y><z>0</z></Position>
+            <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+            <Scale><x>2</x><y>2</y><z>2</z></Scale>
+            <Rigidbody>
+              <Mass>5</Mass><!-- ちょっと重い -->
+              <Drag>0</Drag><!-- 速度減衰なし -->
+              <AngularDrag>0</AngularDrag><!-- 角速度減衰なし -->
+              <UseGravity>false</UseGravity><!-- 重力の影響を受けない -->
+              <IsKinematic>false</IsKinematic><!-- 物理演算の影響を受ける -->
+            </Rigidbody>
+            <RandomColor>true</RandomColor><!-- 色はランダム -->
+          </Object>
+        </Generator>
+      </Generators>
+    </Model>
+    <Model>
+      <Name>F35</Name>
+      <File>f35.model</File>
+      <Position><x>0</x><y>0</y><z>0.05</z></Position>
+      <Rotation><x>0</x><y>180</y><z>180</z></Rotation>
+      <Scale><x>0.01</x><y>0.01</y><z>0.01</z></Scale>
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.1</x><y>0.05</y><z>0.15</z></Scale>
+        </Collision>
+      </Collisions>
+      <Generators>
+        <Generator>
+          <Timespan>1.0</Timespan>
+          <Lifespan>5.0</Lifespan>
+          <SpeedMin>5.0</SpeedMin>
+          <SpeedMax>10.0</SpeedMax>
+          <RotationMin><x>0</x><y>0</y><z>0</z></RotationMin>
+          <RotationMax><x>0</x><y>0</y><z>0</z></RotationMax>
+          <Object>
+            <Model>Missile</Model>
+            <Position><x>0</x><y>-0.01</y><z>0</z></Position>
+            <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+            <Scale><x>2</x><y>2</y><z>2</z></Scale>
+            <Rigidbody>
+              <UseGravity>false</UseGravity>
+              <IsKinematic>false</IsKinematic>
+            </Rigidbody>
+          </Object>
+        </Generator>
+      </Generators>
+    </Model>
+    <Model>
+      <Name>Roadbike</Name>
+      <File>a901_roadbike.model</File>
+      <Position><x>0.015</x><y>-0.45</y><z>0.1</z></Position>
+      <Rotation><x>-90</x><y>0</y><z>0</z></Rotation>
+      <Scale><x>1</x><y>1</y><z>1</z></Scale>
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.1</x><y>0.9</y><z>1.6</z></Scale>
+        </Collision>
+      </Collisions>
+    </Model>
+    <Model>
+      <Name>Missile</Name>
+      <File>missile.model</File>
+      <Position><x>0</x><y>-0.003</y><z>0.02</z></Position>
+      <Rotation><x>0</x><y>90</y><z>180</z></Rotation>
+      <Scale><x>0.01</x><y>0.01</y><z>0.01</z></Scale>
+      <Collisions>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0</y><z>0</z></Position>
+          <Rotation><x>90</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>0.01</x><y>0.09</y><z>0.01</z></Scale>
+          <Bounciness>1.0</Bounciness><!-- すごく跳ねる -->
+          <DynamicFriction>1.0</DynamicFriction><!-- 動摩擦係数 -->
+          <StaticFriction>1.0</StaticFriction><!-- 静止摩擦係数 -->
+        </Collision>
+      </Collisions>
+    </Model>
+  </Models>
+　<!-- ステージごとの設定 -->
+  <Stages>
+    <Stage>
+      <Name>Shitsumu</Name><!-- ステージ名（部分一致） -->
+      <Objects><!-- ステージに配置するオブジェクト -->
+        <Object>
+          <Model>TracerWeaponL</Model>
+          <Position><x>0.1</x><y>0.825</y><z>-1.3</z></Position>
+          <Rotation><x>-15</x><y>-25</y><z>90</z></Rotation>
+          <Scale><x>1</x><y>1</y><z>1</z></Scale>
+        </Object>
+        <Object>
+          <Model>TracerWeaponR</Model>
+          <Position><x>0</x><y>0.8125</y><z>-1.2</z></Position>
+          <Rotation><x>0</x><y>45</y><z>90</z></Rotation>
+          <Scale><x>1</x><y>1</y><z>1</z></Scale>
+        </Object>
+        <Object>
+          <Model>TracerViser</Model>
+          <Position><x>-0.25</x><y>0.84</y><z>-1.4</z></Position>
+          <Rotation><x>-45</x><y>-45</y><z>0</z></Rotation>
+          <Scale><x>1</x><y>1</y><z>1</z></Scale>
+        </Object>
+        <Object>
+          <Model>F22</Model>
+          <Position><x>0</x><y>1.6</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>2</x><y>2</y><z>2</z></Scale>
+          <LissajousAmplitude><x>0.75</x><y>0</y><z>0.75</z></LissajousAmplitude>
+          <LissajousFrequency><x>0.25</x><y>0</y><z>0.25</z></LissajousFrequency>
+          <LissajousOffset><x>0</x><y>0</y><z>90</z></LissajousOffset>
+        </Object>
+        <Object>
+          <Model>F35</Model>
+          <Position><x>0</x><y>1.6</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>2</x><y>2</y><z>2</z></Scale>
+          <LissajousAmplitude><x>0.75</x><y>0</y><z>0.75</z></LissajousAmplitude>
+          <LissajousFrequency><x>0.25</x><y>0</y><z>0.25</z></LissajousFrequency>
+          <LissajousOffset><x>180</x><y>0</y><z>270</z></LissajousOffset>
+        </Object>
+        <Object>
+          <Model>Roadbike</Model>
+          <Position><x>0</x><y>2.45</y><z>-3.25</z></Position>
+          <Rotation><x>0</x><y>90</y><z>15</z></Rotation>
+          <Scale><x>1.2</x><y>1.2</y><z>1.2</z></Scale>
+　　　　　<Rigidbody>
+            <UseGravity>true</UseGravity><!-- 落としてみる -->
+            <IsKinematic>false</IsKinematic>
+          </Rigidbody>
+        </Object>
+      </Objects>
+      <!-- ステージのあたり判定 -->
+      <Collisions>
+        <!-- 壁と床 -->
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>-0.49</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>10</x><y>1</y><z>10</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>3.5</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>10</x><y>1</y><z>10</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>-2.6</x><y>2</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>1</x><y>5</y><z>10</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>2.6</x><y>2</y><z>0</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>1</x><y>5</y><z>10</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>2</y><z>3.7</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>10</x><y>5</y><z>1</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>2</y><z>-3.8</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>10</x><y>5</y><z>1</z></Scale>
+        </Collision>
+        <!-- 机 -->
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0.4</y><z>-1.18</z></Position>
+          <Rotation><x>0</x><y>0</y><z>0</z></Rotation>
+          <Scale><x>2.1</x><y>0.8</y><z>1</z></Scale>
+        </Collision>
+        <!-- ディスプレイ -->
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>-0.8</x><y>1.1</y><z>-0.95</z></Position>
+          <Rotation><x>8</x><y>-38</y><z>0</z></Rotation>
+          <Scale><x>0.9</x><y>0.7</y><z>0.2</z></Scale>
+        </Collision>
+        <!-- 椅子 -->
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>-0.25</x><y>0.625</y><z>-2.3</z></Position>
+          <Rotation><x>-8</x><y>50</y><z>0</z></Rotation>
+          <Scale><x>0.6</x><y>1.25</y><z>0.25</z></Scale>
+        </Collision>
+        <Collision>
+          <Primitive>Cube</Primitive>
+          <Position><x>0</x><y>0.35</y><z>-2.1</z></Position>
+          <Rotation><x>0</x><y>50</y><z>0</z></Rotation>
+          <Scale><x>1</x><y>0.7</y><z>0.7</z></Scale>
+        </Collision>
+      </Collisions>
+    </Stage>
+  </Stages>
+</Config>
